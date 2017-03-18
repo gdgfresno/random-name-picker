@@ -105,84 +105,6 @@ var participantsLength = participants.length;
 for(var i = 0; i < participantsLength; i++) {
   namesFeed.push(participants[i].name + ' (' + maskEmail(participants[i].email) + ')');
 }
-
-var extraNames = ['Barbara McFell',
-                      'Tempo McKeteketly',
-                      'Maonga Irpaae',
-                      'Jose Tunisia',
-                      'Bob Bobson',
-/*                      'Harold Greenoff',
-                      'Jeff Penn',
-                      'Ewan Freedom',
-                      'Benjamin Turkin',
-                      'Robert Harper',
-                      'Sally Cladwell',
-                      'Gregory Tomson',
-                      'Benita Dano',
-                      'Tameka Chea',
-                      'Fernando Guntrum',
-                      'Cody Devita',
-                      'Margery Moloney',
-                      'Jessie Wagar',
-                      'Jessie Burkhard',
-                      'Cody Lamotte',
-                      'Tabatha Cantley',
-                      'Hugh Fullwood',
-                      'Emilia Janusz',
-                      'Erik Taketa',
-                      'Lenore Laughter',
-                      'Kathrine Palazzo',
-                      'Lonnie Garron',
-                      'Tyrone Shott',
-                      'Gay Duble',
-                      'Pearlie Newberg',
-                      'Clinton Rayl',
-                      'Louisa Strey',
-                      'Saundra Ingenito',
-                      'Fernando Jenkin',
-                      'Maricela Tonkin',
-                      'Allie Borjas',
-                      'Clinton Rickenbacker',
-                      'Cody Golay',
-                      'Jerri Tienda',
-                      'Nita Pippen',
-                      'Alejandra Bonhomme',
-                      'Nelson Eguia',
-                      'Rae Velasques',
-                      'Boyce Edeker',
-                      'Cedrick Culotti',
-                      'Elenora Nagindas',
-                      'Arletta Miran',
-                      'Alica Knudsvig',
-                      'Von Ostroot',
-                      'Tomika Nuesca',
-                      'Felton Pattinson',
-                      'Cristopher Laper',
-                      'Shonna Parrotta',
-                      'Sarina Macurdy',
-                      'Waylon Companie',
-                      'Shon Carratura',
-                      'Jae Kneser',
-                      'Janett Papiernik',
-                      'Lynwood Bellar',
-                      'Jeramy Contopoulos',
-                      'Hong Nederostek',
-                      'Gigi Mccarn',
-                      'Sid Mursko',
-                      'Bielser',
-                      'Jospeh Lustberg',
-                      'Spring Luckinbill',
-                      'Ciera Chionchio',
-                      'Marleen Litchard',
-                      'Eldridge Brynga',
-                      'Leif Dinho',
-                      'Gigi Kornblatt',
-                      'Idell Chagollan',*/
-                      'Michale Mcclod'];
-
-for(var i = 0; i < extraNames.length; i++) {
-  namesFeed.push(extraNames[i]);
-}
 var names = Array.from(namesFeed);
 
 function reset(){
@@ -198,8 +120,7 @@ function reset(){
   }
   for(var i in names) {
     name = names[i];
-    if (name == "" || typeof(name) == undefined){
-
+    if (name == "" || typeof(name) == undefined) {
     } else {
         namesbreak = namesbreak + name + "\n";
     }
