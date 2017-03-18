@@ -64,15 +64,54 @@ body { background:#F1C40F url(img/bg-noise-orange.png); }
   
   <script src="js/foundation.min.js"></script>
   <script>$(document).foundation();</script>
-  
+
+<script src="data/raffleFeed.jsonp"></script>
+
 <script>
+String.prototype.setCharAt = function(index, char) {
+  return this.substr(0, index) + char + this.substr(index + 1);
+}
+
+function randomXToY(minVal, maxVal)
+{
+  var randVal = minVal + (Math.random() * (maxVal - minVal));
+  return Math.round(randVal);
+}
+
+function maskString(str) {
+  var strLen = str.length;
+  var numToMask = Math.min(strLen * 3 / 5, strLen - 2);
+  for (var i = 0; i < numToMask;) {
+    var pos = randomXToY(1, strLen - 2);
+    if (str.charAt(pos) != '*') {
+      str = str.setCharAt(pos, '*');
+      i++;
+    }
+  }
+  return str;
+}
+
+function maskEmail(email) {
+  var atIndex = email.indexOf('@');
+  var namePart = email.substr(0, atIndex);
+  var domainIndex = email.lastIndexOf('.');
+  var providerPart = email.substr(atIndex + 1, domainIndex - atIndex - 1);
+  return maskString(namePart) + '@' + maskString(providerPart) + email.substr(domainIndex);
+}
+
 var text;
-var names = new Array('Barbara McFell',
+var namesFeed = [];
+var participantsLength = participants.length;
+for(var i = 0; i < participantsLength; i++) {
+  namesFeed.push(participants[i].name + ' (' + maskEmail(participants[i].email) + ')');
+}
+
+var extraNames = ['Barbara McFell',
                       'Tempo McKeteketly',
                       'Maonga Irpaae',
                       'Jose Tunisia',
                       'Bob Bobson',
-                      'Harold Greenoff',
+/*                      'Harold Greenoff',
                       'Jeff Penn',
                       'Ewan Freedom',
                       'Benjamin Turkin',
@@ -138,99 +177,31 @@ var names = new Array('Barbara McFell',
                       'Eldridge Brynga',
                       'Leif Dinho',
                       'Gigi Kornblatt',
-                      'Idell Chagollan',
-                      'Michale Mcclod'
-                      );
+                      'Idell Chagollan',*/
+                      'Michale Mcclod'];
+
+for(var i = 0; i < extraNames.length; i++) {
+  namesFeed.push(extraNames[i]);
+}
+var names = Array.from(namesFeed);
 
 function reset(){
   // re-enable go button
   setTimeout("$('#go').removeAttr('disabled')",11005);
   var namesbreak = "";
-  if(gup('names') != ""){
+  if(gup('names') != "") {
     var names = gup('names');
     namesbreak = names.replace(/101/g,'\n');
     namesbreak = namesbreak.replace(/%20/g,' ');          
-    }
-    else   {
-      var names = new Array('Barbara McFell',
-                      'Tempo McKeteketly',
-                      'Maonga Irpaae',
-                      'Jose Tunisia',
-                      'Bob Bobson',
-                      'Harold Greenoff',
-                      'Jeff Penn',
-                      'Ewan Freedom',
-                      'Benjamin Turkin',
-                      'Robert Harper',
-                      'Sally Cladwell',
-                      'Gregory Tomson',
-                      'Benita Dano',
-                      'Tameka Chea',
-                      'Fernando Guntrum',
-                      'Cody Devita',
-                      'Margery Moloney',
-                      'Jessie Wagar',
-                      'Jessie Burkhard',
-                      'Cody Lamotte',
-                      'Tabatha Cantley',
-                      'Hugh Fullwood',
-                      'Emilia Janusz',
-                      'Erik Taketa',
-                      'Lenore Laughter',
-                      'Kathrine Palazzo',
-                      'Lonnie Garron',
-                      'Tyrone Shott',
-                      'Gay Duble',
-                      'Pearlie Newberg',
-                      'Clinton Rayl',
-                      'Louisa Strey',
-                      'Saundra Ingenito',
-                      'Fernando Jenkin',
-                      'Maricela Tonkin',
-                      'Allie Borjas',
-                      'Clinton Rickenbacker',
-                      'Cody Golay',
-                      'Jerri Tienda',
-                      'Nita Pippen',
-                      'Alejandra Bonhomme',
-                      'Nelson Eguia',
-                      'Rae Velasques',
-                      'Boyce Edeker',
-                      'Cedrick Culotti',
-                      'Elenora Nagindas',
-                      'Arletta Miran',
-                      'Alica Knudsvig',
-                      'Von Ostroot',
-                      'Tomika Nuesca',
-                      'Felton Pattinson',
-                      'Cristopher Laper',
-                      'Shonna Parrotta',
-                      'Sarina Macurdy',
-                      'Waylon Companie',
-                      'Shon Carratura',
-                      'Jae Kneser',
-                      'Janett Papiernik',
-                      'Lynwood Bellar',
-                      'Jeramy Contopoulos',
-                      'Hong Nederostek',
-                      'Gigi Mccarn',
-                      'Sid Mursko',
-                      'Bielser',
-                      'Jospeh Lustberg',
-                      'Spring Luckinbill',
-                      'Ciera Chionchio',
-                      'Marleen Litchard',
-                      'Eldridge Brynga',
-                      'Leif Dinho',
-                      'Gigi Kornblatt',
-                      'Idell Chagollan',
-                      'Michale Mcclod'
-                      );
-    for(var i in names){
-      name = names[i];
-      if (name == "" || typeof(name) == undefined){}else{
-         namesbreak = namesbreak + name + "\n";
-      }
+  } else {
+    var names = Array.from(namesFeed);
+  }
+  for(var i in names) {
+    name = names[i];
+    if (name == "" || typeof(name) == undefined){
+
+    } else {
+        namesbreak = namesbreak + name + "\n";
     }
   }
   $("#namesbox").val(namesbreak);
