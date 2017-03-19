@@ -29,13 +29,10 @@ function maskEmail(email) {
   return maskString(namePart) + '@' + maskString(providerPart) + email.substr(domainIndex);
 }
 
-var restViewed = false;
-
 (function (document, $) {
   var hatData = [];
   var restData = [];
 
-  for(var i = 0; i < 100; i++) {
   $.each(participants, function(index, data) {
     var tableData = [
         data.name,
@@ -49,18 +46,12 @@ var restViewed = false;
       hatData.push(tableData);
     }
   });
-  }
 
   document.hatTable = $("#hat-table").DataTable({
     data: hatData
   });
 
-  $("#rest_tab_tab").click(function (ev) {
-    if (!restViewed) {
-      document.restTable = $("#rest-table").DataTable({
-        data: restData
-      });
-      restViewed = true;
-    }
+  document.restTable = $("#rest-table").DataTable({
+    data: restData
   });
 }) (document, $);
