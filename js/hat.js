@@ -34,7 +34,7 @@ function maskEmail(email) {
   var restData = [];
 
   $.each(
-    participants.sort(
+    participants/*.sort(
       function(a, b) {
         var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
         if (nameA < nameB) //sort string ascending
@@ -43,7 +43,7 @@ function maskEmail(email) {
           return 1;
         return 0; //default return value (no sorting)
       }
-    ),
+    )*/,
     function (index, data) {
       var tableData = [
           data.name,
